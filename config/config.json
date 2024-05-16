@@ -1,0 +1,18 @@
+{
+  "test": {
+    "username": "root",
+    "password": "password",
+    "database": "gh_quiver_test",
+    "host": "localhost",
+    "dialect": "mysql",
+    "port": 3305
+  },
+  "development": {
+    "username": "root",
+    "password": "password",
+    "database": "gh_quiver_develop",
+    "host": "localhost",
+    "dialect": "mysql",
+    "port": 3305
+  }
+}

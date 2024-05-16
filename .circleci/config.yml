@@ -1,0 +1,73 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+executors:
+  gh-executor:
+    docker:
+      - image: cimg/node:16.15.1
+        environment:
+          MYSQL_DATABASE: 'gh_quiver_test'
+          MYSQL_HOST: 'localhost'
+          MYSQL_PASSWORD: 'password'
+          MYSQL_USER: 'root'
+          CC_TEST_REPORTER_ID: $CC_TEST_REPORTER_ID
+      - image: mysql:5.6
+        environment:
+          MYSQL_DATABASE: 'gh_quiver_test'
+          MYSQL_HOST: 'localhost'
+          MYSQL_ROOT_PASSWORD: 'password'
+          MYSQL_PASSWORD: 'password'
+          MYSQL_USER: 'user'
+jobs:
+  test:
+    executor: gh-executor
+    environment:
+      CC_TEST_REPORTER_ID: e56dfce5eff1a66b8347a9a3e04ce5e0ab4a9ac68624f706ee914c23e0573aba
+    steps:
+      - checkout
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: npm install
+      - run:
+          name: Set Up DB
+          command: |
+            sudo apt-get update
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u root -ppassword --execute="SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));"
+            mysql -h 127.0.0.1 -u root -ppassword --execute="SET GLOBAL foreign_key_checks = 0;"
+
+            mysql --host=127.0.0.1 -uroot -ppassword gh_quiver_test < ~/project/seeders/schema.sql
+
+            echo "{ \"test\": { \"username\": \"root\", \"password\": \"password\", \"database\": \"gh_quiver_test\", \"host\": \"localhost\", \"dialect\": \"mysql\"}}" > ~/project/config/config.json
+            npx sequelize-cli db:migrate --env test
+
+      - run: npm run clean-code
+      # Setup Code Climate
+      - run:
+          name: "Setup Code Climate Test-Reporter"
+          command: |
+            # download test reporter as a static binary
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      # Run tests
+      - run: ./cc-test-reporter before-build
+      - run: npm run test:ci && ./cc-test-reporter after-build --exit-code $?
+
+  npm-publish:
+    executor: gh-executor
+    steps:
+      - checkout
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: npm i
+      - run: npm publish
+
+workflows:
+    version: 2
+    publish:
+      jobs:
+        - test
+        - npm-publish:
+            requires:
+              - test
+            filters:
+              branches:
+                only: main
