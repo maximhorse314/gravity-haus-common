@@ -54,4 +54,3 @@ run: `gh-cli faas-fun --http-mmethod <delete | get | patch | post | put > --func
 [Step by step: Building and publishing an NPM Typescript package.](https://itnext.io/step-by-step-building-and-publishing-an-npm-typescript-package-44fe7164964c)
 
 [Creating and publishing private packages](https://docs.npmjs.com/creating-and-publishing-private-packages)
-
