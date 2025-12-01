@@ -13,6 +13,8 @@ export const createAudit = async (instance: Model<any>): Promise<Audit> => {
   });
 };
 
+
+
 export const getAudits = async (modelName: string, modelId: number): Promise<Audit[]> => {
   return Audit.findAll({
     where: {
