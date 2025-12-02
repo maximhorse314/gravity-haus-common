@@ -15,4 +15,5 @@ const getCurrentUser = async (event: APIGatewayProxyEvent): Promise<UserAttribut
   return User.findByPk(id);
 };
 
+
 export default getCurrentUser;
