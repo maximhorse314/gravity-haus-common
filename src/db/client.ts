@@ -32,6 +32,7 @@ import OldMembershipInfo from '../models/oldMembershipInfo.model';
 import EventWebhook from '../models/eventWebhook.model';
 import UserProfileData from '../models/userProfileData.model';
 
+
 /**
  * Singleton class that initializes database connection and adds models to Sequelize
  *
