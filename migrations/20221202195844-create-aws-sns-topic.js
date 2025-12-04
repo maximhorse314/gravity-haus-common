@@ -34,6 +34,7 @@ module.exports = {
           defaultValue: Sequelize.literal('NOW()'),
         },
       });
+      
     }
   },
 
