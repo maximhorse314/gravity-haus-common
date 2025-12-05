@@ -7,6 +7,7 @@ module.exports = {
     try {
       await queryInterface.describeTable('StripePlan')
     } catch (e) {
+      
       await queryInterface.createTable('StripePlan', {
         id: {
           allowNull: false,
