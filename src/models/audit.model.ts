@@ -1,6 +1,7 @@
 import { Optional } from 'sequelize';
 import { Table, Model, Column, DataType } from 'sequelize-typescript';
 
+
 export interface AuditAttributes {
   id: number;
   modelId: number;
