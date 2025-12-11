@@ -20,6 +20,7 @@ const getFunctionPath = (sqsFileName: string): string => {
   return functionPath;
 };
 
+
 const lazyLoadSqs = async (sqsFileName: string, message: string): Promise<any> => {
   try {
     const event = constructSqsEvent(JSON.parse(message), sqsFileName);
