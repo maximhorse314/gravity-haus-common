@@ -29,6 +29,7 @@ export class Docusign {
     this.DOCUSIGN_ACCOUNT_ID = process.env.DOCUSIGN_ACCOUNT_ID;
     this.DOCUSIGN_BASE_URL = process.env.DOCUSIGN_BASE_URL;
   }
+  
 
   /**
    *
