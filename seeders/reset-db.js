@@ -15,6 +15,7 @@ module.exports = {
       console.log(err);
     }
   },
+  
 
   down: (queryInterface, Sequelize) => {
     console.log('No Down')
