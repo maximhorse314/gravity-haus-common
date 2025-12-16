@@ -8,6 +8,7 @@ module.exports = {
       const tableName = 'Subscription'
       await queryInterface.describeTable(tableName)
     } catch (e) {
+      
       await queryInterface.createTable('Subscription', {
         id: {
           allowNull: false,
