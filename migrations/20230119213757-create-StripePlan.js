@@ -6,8 +6,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     try {
       await queryInterface.describeTable('StripePlan')
-    } catch (e) {
-      
+    } catch (e) {      
       await queryInterface.createTable('StripePlan', {
         id: {
           allowNull: false,
