@@ -80,7 +80,6 @@ export class Client {
   public static getInstance(models?: any, dbConfig: SequelizeOptions = {}): Client {
     if (!Client.instance) {
       Client.instance = new Client(dbConfig);
-
       Client.instance.db.addModels([
         Account,
         ActivityLog,
