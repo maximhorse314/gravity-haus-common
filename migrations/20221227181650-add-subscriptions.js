@@ -9,6 +9,8 @@ module.exports = {
     } catch (e) {
       
       await queryInterface.createTable('Subscription', {
+
+        
         id: {
           allowNull: false,
           autoIncrement: true,
