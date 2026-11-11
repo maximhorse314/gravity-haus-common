@@ -1,3 +1,5 @@
+
+
 import { Model } from 'sequelize-typescript';
 
 import Audit from '../models/audit.model';
