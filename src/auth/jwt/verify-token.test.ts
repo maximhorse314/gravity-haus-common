@@ -1,3 +1,4 @@
+
 import { sign } from 'jsonwebtoken';
 
 import verify from './verify-token';
