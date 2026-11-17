@@ -2,7 +2,6 @@
 
 const exec = require('node-async-exec');
 
-
 module.exports = {
   async up (queryInterface) {
     const copyDev = 'mysql --host=127.0.0.1 --port=3305 -uroot -ppassword gh_quiver_develop < ./seeders/schema.sql'
